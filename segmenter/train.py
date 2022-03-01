@@ -88,11 +88,11 @@ def build_model(args, tune_config=None, hvd=None):
     lrate = tf.keras.optimizers.schedules.PolynomialDecay(
         initial_lr, total_steps, end_learning_rate=final_lr, power=0.9)
 
-    if optim_name == 'sgd':
+    if args.optimizer == 'sgd':
         optimizer = tf.keras.optimizers.SGD(learning_rate=lrate, momentum=0.9)
-    elif optim_name == 'adam':
+    elif args.optimizer == 'adam':
         optimizer = tf.keras.optimizers.Adam(learning_rate=lrate)
-    elif optim_name == 'rmsprop':
+    elif args.optimizer == 'rmsprop':
         optimizer = tf.keras.optimizers.RMSprop(learning_rate=lrate, rho=0.9)
     else:
         raise ValueError
